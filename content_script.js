@@ -2,7 +2,9 @@
  * Content Script To Handle JS. 
  */
 
+console.log("default")
 const port = chrome.runtime.connect({ name: 'background' });
+console.log(`this is the port: ${port}`)
 port.onMessage.addListener(async (msg) => {
     console.log("connected?");
     if (msg.purpose == "birdClassifyModal") {
