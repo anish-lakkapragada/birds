@@ -28,7 +28,7 @@ function main(port) {
 }
 
 chrome.runtime.onConnect.addListener((p) => {
-    console.log("deez nuts");
+    console.log("puss nuwts");
     const port = p;
     main(port);
 }); 
