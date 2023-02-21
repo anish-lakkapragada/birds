@@ -17,5 +17,11 @@
     ], 
     "background": {
       "service_worker": "src/background.jsx"
-    }
+    }, 
+    "web_accessible_resources": [
+      {
+        "resources": ["src/modal.html", "index.html"],
+        "matches": ["<all_urls>"]
+      }
+    ]
 }

@@ -15,10 +15,11 @@ port.onMessage.addListener(async (msg) => {
         document.body.appendChild(div);
 
         // add the modal!
-        fetch(chrome.runtime.getURL("modal.html"))
+        fetch(chrome.runtime.getURL("src/modal.html"))
             .then(response => response.text())
             .then(data => {
                 // adding the modal
+                console.log(data);
                 document.getElementById('inject-container').innerHTML = data;
                 const modal = document.getElementsByClassName("modal")[0] 
                 modal.style.display = "block";
