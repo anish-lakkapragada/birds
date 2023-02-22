@@ -6,11 +6,81 @@
 
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <div class="modal">
-        <div class="modal-content">
-            <iframe src="http://localhost:5173/Cyanocorax%20ynca?url=https://pbs.twimg.com/media/FpgCSxAaAAAFPBJ?format=jpg&name=4096x4096"></iframe>   
+        <div class="modal-content" id="parenty">
+            <!-- <iframe src="http://localhost:5173/Cyanocorax%20ynca?url=https://pbs.twimg.com/media/FpgCSxAaAAAFPBJ?format=jpg&name=4096x4096"></iframe>    -->
         </div>
     </div>
+
+    <script> 
+        
+        function getParams() {
+            var idx = document.URL.indexOf('?');
+            var params = []
+            if (idx != -1) {
+                var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+                for (var i=0; i<pairs.length; i++) {
+                    nameVal = pairs[i].split('=');
+                    params.push(nameVal[1]);
+                }
+            }
+            return params;
+        }
+        
+        const params = getParams();
+        console.log(params);
+        const websiteURL = params[0];
+        
+        // add an iframe 
+        const iframe = document.createElement("iframe");
+        iframe.classList.add("iframy");
+        iframe.src = websiteURL;
+        document.getElementById("parenty").appendChild(iframe);
+    </script> 
 </body>
+
+<style>
+
+     @-webkit-keyframes animatetop {
+        from {top:-300px; opacity:0} 
+        to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+    
+    iframe {
+        height: 350px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed; 
+        padding-top: 50px; 
+        font-family: Helvetica;
+        left: 0; 
+        top: 0;
+        width: 100%; 
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.5);
+        font-family: Inter var,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    }
+  
+    .modal-content {
+        position: relative; 
+        background-color: white;
+        text-align: center;
+        padding: 20px; 
+        margin: auto; 
+        width: 75%;  
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+</style> 
+
 </html>

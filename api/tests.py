@@ -3,9 +3,8 @@
 # %% 
 import requests 
 URL = "http://127.0.0.1:8000"
-
-with open("whitecrowned_sparrow.png", 'rb') as f: 
-    r = requests.post(f"{URL}/predict", files={"file": f})
+imageURL = "https://pbs.twimg.com/media/FpivM1JWAAABhW0?format=jpg&name=large"
+r = requests.post(f"{URL}/predict", params={"imageURL": imageURL})
 
 assert r.status_code == 200, r
 print(r.json())

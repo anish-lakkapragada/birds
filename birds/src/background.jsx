@@ -20,9 +20,7 @@ function main(port) {
         const {srcUrl, menuItemId} = info;
         console.log(info);
         if (menuItemId === "getBirdClassification") {
-            // they want some sort of classification, send a request to backend. 
-            console.log("deez nuts");
-            port.postMessage({"purpose": "birdClassifyModal"});
+            port.postMessage({ purpose: "birdClassifyModal", srcUrl: srcUrl });
         }
     }); 
 }

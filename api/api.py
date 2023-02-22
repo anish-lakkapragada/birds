@@ -2,6 +2,9 @@ import fastapi
 import typing 
 from birds_model import predict_image, convert_image
 from uuid import uuid4
+import requests
+import shutil
+import time
 
 app = fastapi.FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,14 +20,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/predict")
-async def predict_bird(file: typing.Optional[fastapi.UploadFile] = fastapi.File(...)): 
-   id = uuid4()
-   path = f"temp/{id}"
-   with open(path, 'wb') as f: 
-       f.write(await file.read())
-   converted_image = convert_image(path)
-   image_prediction = predict_image(converted_image)
-   return {"SN": image_prediction}
+@app.get("/predict")
+async def predict_bird(imageURL: str): 
+    res = requests.get(imageURL, stream = True)
+    file_name = None 
+    if res.status_code == 200:
+        file_name = f"temp/photo-{time.time()}"
+        with open(file_name,'wb') as f:
+            shutil.copyfileobj(res.raw, f)
+        print('Image sucessfully Downloaded: ',file_name)
+    else:
+        return {"Error": "shit"}
+        
+    converted_image = convert_image(file_name)
+    image_prediction = predict_image(converted_image)
+    return {"SN": image_prediction}
         
 

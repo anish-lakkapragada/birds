@@ -35,7 +35,7 @@
           imageSrcs.push({imageSrc: wikipediaImageURL, imageIndex: key});
     } 
   }
-  
+
   if (!(nuthatchDataAvailable || wikipediaDataAvailable)) {
     fcked = true;  
   }
@@ -73,8 +73,8 @@
       {/if}
 
       {#if nuthatchDataAvailable}
-        <h1 class="-mt-4 text-center text-2xl"> Quick Facts </h1> 
-        <div class="-mt-4 text-xl flex flex-row gap-[6em] w-full justify-center"> 
+        <h1 class="mt-0 text-center text-2xl"> Quick Facts </h1> 
+        <div class="mt-0 text-xl flex flex-row gap-[6em] w-full justify-center"> 
           <p> <strong> Concern: </strong> {nuthatchData[0].status} </p>
           {#if nuthatchData[0].wingspanMin && nuthatchData[0].wingspanMax} <p> <strong> Wingspan Length: </strong> {nuthatchData[0].wingspanMin}-{nuthatchData[0].wingspanMax}cm </p> {/if}
           {#if nuthatchData[0].lengthMin && nuthatchData[0].lengthMax} <p> <strong> Bird Length: </strong> {nuthatchData[0].lengthMin}-{nuthatchData[0].lengthMax}cm </p> {/if}
