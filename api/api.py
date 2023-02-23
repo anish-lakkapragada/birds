@@ -1,3 +1,4 @@
+# %%
 import fastapi
 import typing 
 from birds_model import predict_image, convert_image
@@ -6,11 +7,12 @@ import requests
 import shutil
 import time
 import os 
+import urllib.request
+
 
 app = fastapi.FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
-
-
+ 
 origins = ["*"]
 
 app.add_middleware(
@@ -21,21 +23,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# image URL downloading stuff
+req = urllib.request.build_opener()
+req.addheaders = [("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64)")]
+urllib.request.install_opener(req)
+
 @app.get("/predict")
 async def predict_bird(imageURL: str): 
-    res = requests.get(imageURL, stream = True)
-    file_name = None 
-    if res.status_code == 200:
-        file_name = f"temp/photo-{time.time()}"
-        with open(file_name,'wb') as f:
-            shutil.copyfileobj(res.raw, f)
-        print('Image sucessfully Downloaded: ',file_name)
-    else:
-        return {"Error": "shit"}
-        
+    file_name = f"temp/photo-{time.time()}"
+    try: 
+        urllib.request.urlretrieve(imageURL, file_name)
+    except Exception as e: 
+        print(e)
+        return {"error": "shit"}
+            
     converted_image = convert_image(file_name)
     image_prediction = predict_image(converted_image)
     os.remove(file_name) # delete 
     return {"SN": image_prediction}
         
 
+
+# %%

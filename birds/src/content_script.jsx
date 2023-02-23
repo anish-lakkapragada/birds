@@ -26,9 +26,10 @@ port.onMessage.addListener(async (msg) => {
             const data = await fetch(`${ENDPOINT}/predict?imageURL=${srcUrl}`); 
             const classificationResp = await data.json(); 
             let successClassification = true; 
+            console.log(classificationResp);
             if (
               classificationResp.error ||
-              classificationResp.SN.includes("background")
+              classificationResp?.SN.includes("background")
             ) {
               successClassification = false;
             }

@@ -9,8 +9,9 @@
 } */
 
 .iframy {
-    height: 425px !important;
+    height: 450px !important;
     width: 100%;
+    display:block;
     border: 0;
 }
 
@@ -35,7 +36,7 @@
     padding: 20px; 
     margin: auto; 
     width: 75%;  
-    height: 425px !important;
+    height: 100%;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;

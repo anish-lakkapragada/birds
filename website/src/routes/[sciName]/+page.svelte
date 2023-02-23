@@ -22,7 +22,8 @@
   fetch(`https://xeno-canto.org/api/2/recordings?query=${sciName}`).then(resp => resp.json()).then(xenoRecordingData => {
     const numRecordings = parseInt(xenoRecordingData.numRecordings);
     if (numRecordings >= 1) {
-      audioRecordingURL = xenoRecordingData.recordings[Math.floor(Math.random() * numRecordings)].file;
+      console.log(xenoRecordingData.recordings[0])
+      audioRecordingURL = xenoRecordingData.recordings[0]?.file;
     }
   })
 
@@ -73,7 +74,7 @@
 
   <div class="flex flex-row justify-center gap-2"> 
     {#if browser}
-      <div class="w-[250px] h-[250px] -mt-[100px]"> 
+      <div class={audioRecordingURL ? "w-[250px] h-[250px] -mt-[100px]" : "w-[250px] h-[250px]"}> 
         <Carousel let:loaded bind:this={carousel}>  
           {#each imageSrcs as {imageSrc, imageIndex} (imageSrc)} 
             <div class="img-container"> 
@@ -84,7 +85,7 @@
           {/each}
         </Carousel>
         {#if audioRecordingURL}
-          <div class="flex flex-col text-center justify-center"> 
+          <div class="flex flex-col justify-center"> 
               <h2 class="text-2xl"> Audio of {name} </h2>
               <audio class="w-[250px]"
                 controls
