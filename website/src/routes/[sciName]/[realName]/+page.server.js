@@ -1,9 +1,9 @@
-import {getWikiImageLink} from "../helpers";
+import {getWikiImageLink, getNames} from "../../helpers";
+import DomParser from "dom-parser";
 export async function load({ params, url }) {
-    const {sciName} = params;
+    const {sciName, realName} = params;
 	let requestName = sciName; 
 	let wikipediaImageURL; 
-	let audioRecordingURL; 
 
 	const imageUrl = url.searchParams.get("url")
     const nuthatchURL = `https://nuthatch.lastelm.software/birds?sciName=${sciName}&operator=AND`; 
@@ -45,5 +45,5 @@ export async function load({ params, url }) {
 	const wikipediaPage = await fetch(`https://en.wikipedia.org/wiki/${sciName}`);
 	const wikipediaPageHTML = await wikipediaPage.text(); 
 
-	return {sciName: sciName, wikipediaImageURL: wikipediaImageURL, description: extract, imageUrl: imageUrl, nuthatchDataAvailable: nuthatchDataAvailable, nuthatchData: nuthatchData, wikipediaDataAvailable: wikipediaDataAvailable, wikipediaPageHTML: wikipediaPageHTML}
+	return {sciName: sciName, realName: realName, wikipediaImageURL: wikipediaImageURL, description: extract, imageUrl: imageUrl, nuthatchDataAvailable: nuthatchDataAvailable, nuthatchData: nuthatchData, wikipediaDataAvailable: wikipediaDataAvailable, wikipediaPageHTML: wikipediaPageHTML}
 }

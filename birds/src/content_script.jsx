@@ -67,7 +67,7 @@ port.onMessage.addListener(async (msg) => {
                         <iframe
                         style={{ width: "100%", border: "0" }}
                         className="iframy"
-                        src={`http://localhost:5173/${classificationResp.SN}?url=${srcUrl}`}
+                        src={`http://localhost:5173/${classificationResp.SN}/${classificationResp.RN}/?url=${srcUrl}`}
                         ></iframe>
                     </div>
                     </div>

@@ -4,25 +4,26 @@
   import {browser} from "$app/environment";
   import Carousel from 'svelte-carousel';
   import Speedometer from "svelte-speedometer"; 
+  import {getNames} from "../helpers";
   import { parse } from 'node-html-parser';
   export let data;
 
-  const {imageUrl, wikipediaImageURL, nuthatchDataAvailable, sciName, description, nuthatchData, wikipediaDataAvailable, wikipediaPageHTML} = data; 
+  const {imageUrl, wikipediaImageURL, nuthatchDataAvailable, sciName, realName, description, nuthatchData, wikipediaDataAvailable, wikipediaPageHTML} = data; 
   const parser = new DomParser();
 	const wikipediaDocument = parser.parseFromString(wikipediaPageHTML);
   const loaded = [0];
-  let name; 
   let fcked = false;  
+  let name = realName;
   let key = 0; 
   let carousel; 
   let wikipediaRecording; 
   let audioAttrs; 
   let audioRecordingURL; 
 
+
   fetch(`https://xeno-canto.org/api/2/recordings?query=${sciName}`).then(resp => resp.json()).then(xenoRecordingData => {
     const numRecordings = parseInt(xenoRecordingData.numRecordings);
     if (numRecordings >= 1) {
-      console.log(xenoRecordingData.recordings[0])
       audioRecordingURL = xenoRecordingData.recordings[0]?.file;
     }
   })
@@ -39,7 +40,6 @@
 
   if (wikipediaDataAvailable) {
     // get the name from wikipedia 
-    name = name ? name : wikipediaDocument.getElementsByClassName("mw-page-title-main").innerHTML
     if (wikipediaDocument.getElementsByTagName("audio").length > 0) {
       const root = parse(wikipediaPageHTML); 
       const audioElements = root.getElementsByTagName("audio");
@@ -47,9 +47,6 @@
       wikipediaRecording = `https://en.wikipedia.org/wiki/File:${audioElements[0].rawAttributes['data-mwtitle']}` 
       audioAttrs = audioElements[0].rawAttributes;
     }
-    console.log(wikipediaDocument.getElementsByTagName("audio").length)
-    console.log(wikipediaRecording);
-    console.log("okay!");
 
     //description = Array.from(wikipediaDocument.getElementsByClassName("mw-parser-output")[0].children).filter((element) => element.nodeName == "P")[1].innerHTML
     if (wikipediaImageURL?.length) {
