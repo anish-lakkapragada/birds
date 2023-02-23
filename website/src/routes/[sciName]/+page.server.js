@@ -3,6 +3,8 @@ export async function load({ params, url }) {
     const {sciName} = params;
 	let requestName = sciName; 
 	let wikipediaImageURL; 
+	let audioRecordingURL; 
+
 	const imageUrl = url.searchParams.get("url")
     const nuthatchURL = `https://nuthatch.lastelm.software/birds?sciName=${sciName}&operator=AND`; 
 	let response = await fetch(nuthatchURL, {

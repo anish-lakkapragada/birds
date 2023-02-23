@@ -15,6 +15,16 @@
   let fcked = false;  
   let key = 0; 
   let carousel; 
+  let wikipediaRecording; 
+  let audioAttrs; 
+  let audioRecordingURL; 
+
+  fetch(`https://xeno-canto.org/api/2/recordings?query=${sciName}`).then(resp => resp.json()).then(xenoRecordingData => {
+    const numRecordings = parseInt(xenoRecordingData.numRecordings);
+    if (numRecordings >= 1) {
+      audioRecordingURL = xenoRecordingData.recordings[Math.floor(Math.random() * numRecordings)].file;
+    }
+  })
 
   const imageSrcs = [];
   imageSrcs.push({imageSrc: imageUrl, imageIndex: key});
@@ -29,6 +39,17 @@
   if (wikipediaDataAvailable) {
     // get the name from wikipedia 
     name = name ? name : wikipediaDocument.getElementsByClassName("mw-page-title-main").innerHTML
+    if (wikipediaDocument.getElementsByTagName("audio").length > 0) {
+      const root = parse(wikipediaPageHTML); 
+      const audioElements = root.getElementsByTagName("audio");
+      // https://en.wikipedia.org/wiki/File:Carpodacus_mexicanus_vocalizations_-_pone.0027052.s006.oga
+      wikipediaRecording = `https://en.wikipedia.org/wiki/File:${audioElements[0].rawAttributes['data-mwtitle']}` 
+      audioAttrs = audioElements[0].rawAttributes;
+    }
+    console.log(wikipediaDocument.getElementsByTagName("audio").length)
+    console.log(wikipediaRecording);
+    console.log("okay!");
+
     //description = Array.from(wikipediaDocument.getElementsByClassName("mw-parser-output")[0].children).filter((element) => element.nodeName == "P")[1].innerHTML
     if (wikipediaImageURL?.length) {
           key += 1; 
@@ -52,7 +73,7 @@
 
   <div class="flex flex-row justify-center gap-2"> 
     {#if browser}
-      <div class="w-[250px] h-[250px]"> 
+      <div class="w-[250px] h-[250px] -mt-[100px]"> 
         <Carousel let:loaded bind:this={carousel}>  
           {#each imageSrcs as {imageSrc, imageIndex} (imageSrc)} 
             <div class="img-container"> 
@@ -62,6 +83,15 @@
             </div>
           {/each}
         </Carousel>
+        {#if audioRecordingURL}
+          <div class="flex flex-col text-center justify-center"> 
+              <h2 class="text-2xl"> Audio of {name} </h2>
+              <audio class="w-[250px]"
+                controls
+                src={audioRecordingURL}
+              > </audio>
+          </div>
+        {/if}
       </div>
     {/if}
     <div class="p-0 mt-0"> 

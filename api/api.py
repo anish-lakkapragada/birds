@@ -5,6 +5,7 @@ from uuid import uuid4
 import requests
 import shutil
 import time
+import os 
 
 app = fastapi.FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
@@ -34,6 +35,7 @@ async def predict_bird(imageURL: str):
         
     converted_image = convert_image(file_name)
     image_prediction = predict_image(converted_image)
+    os.remove(file_name) # delete 
     return {"SN": image_prediction}
         
 
