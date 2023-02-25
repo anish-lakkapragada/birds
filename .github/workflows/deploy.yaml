@@ -27,6 +27,6 @@ jobs:
           script: |
             rm -rf birds
             git clone git@github.com:anish-lakkapragada/birds.git
-            cd api
+            cd birds/api
             sudo docker-compose build
             sudo docker-compose up -d
