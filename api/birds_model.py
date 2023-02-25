@@ -1,15 +1,16 @@
 # %% 
 """preprocessing step for everything"""
-import tensorflow.compat.v2 as tf
 import tensorflow_hub as hub
-import pandas as pd
 import numpy as np 
 import cv2
-labelmap_df = pd.read_csv("aiy_birds_V1_labelmap.csv")
+from mappings import get_id_to_sciname
+ids_to_sciname = get_id_to_sciname() 
+
+# labelmap_df = pd.read_csv("aiy_birds_V1_labelmap.csv")
 m = hub.KerasLayer('https://tfhub.dev/google/aiy/vision/classifier/birds_V1/1')
 
 def query_index(index): 
-    return labelmap_df[labelmap_df['id'] == index]['name'].values[0]
+    return ids_to_sciname[index]
 # %%
 # import cv2, numpy as np
 # image = cv2.cvtColor(cv2.imread('whitecrowned_sparrow.png'), cv2.COLOR_BGR2RGB)

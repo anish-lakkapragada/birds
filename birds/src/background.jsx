@@ -22,6 +22,9 @@ function main(port) {
         if (menuItemId === "getBirdClassification") {
             port.postMessage({ purpose: "birdClassifyModal", srcUrl: srcUrl });
         }
+        else if (menuItemId == "guessBird") {
+            port.postMessage({purpose: "guessBirdModal", srcUrl: srcUrl})
+        }
     }); 
 }
 

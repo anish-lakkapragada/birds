@@ -1,0 +1,8 @@
+v: 0
+micros:
+  - name: birdsapi2
+    src: ./micro
+    engine: python3.9
+    public_routes:
+      - "/" # exact match
+      - "/predict" # wildcards

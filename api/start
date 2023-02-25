@@ -1,1 +1,0 @@
-uvicorn api:app --reload --reload-exclude tests.py

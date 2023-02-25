@@ -4,7 +4,6 @@
   import {browser} from "$app/environment";
   import Carousel from 'svelte-carousel';
   import Speedometer from "svelte-speedometer"; 
-  import {getNames} from "../helpers";
   import { parse } from 'node-html-parser';
   export let data;
 
@@ -20,11 +19,12 @@
   let audioAttrs; 
   let audioRecordingURL; 
 
-
+  const quickFactsCSS = "mt-0 text-center text-2xl"; 
   fetch(`https://xeno-canto.org/api/2/recordings?query=${sciName}`).then(resp => resp.json()).then(xenoRecordingData => {
     const numRecordings = parseInt(xenoRecordingData.numRecordings);
     if (numRecordings >= 1) {
       audioRecordingURL = xenoRecordingData.recordings[0]?.file;
+      console.log(audioRecordingURL)
     }
   })
 
@@ -60,6 +60,7 @@
   }
 
   console.log(`identified name: ${name}`)
+  console.log(audioRecordingURL);
 
 </script>
 
@@ -86,8 +87,7 @@
               <h2 class="text-2xl"> Audio of {name} </h2>
               <audio class="w-[250px]"
                 controls
-                src={audioRecordingURL}
-              > </audio>
+              > <source src={audioRecordingURL}></audio>
           </div>
         {/if}
       </div>
@@ -101,8 +101,8 @@
       {/if}
 
       {#if nuthatchDataAvailable}
-        <h1 class="mt-0 text-center text-2xl"> Quick Facts </h1> 
-        <div class="mt-0 text-xl flex flex-row gap-[6em] w-full justify-center"> 
+        <h1 class={audioRecordingURL ? quickFactsCSS + " ml-8" : quickFactsCSS}> Quick Facts </h1> 
+        <div class="mt-0 text-md flex flex-row gap-[6em] w-full justify-center"> 
           <p> <strong> Concern: </strong> {nuthatchData[0].status} </p>
           {#if nuthatchData[0].wingspanMin && nuthatchData[0].wingspanMax} <p> <strong> Wingspan Length: </strong> {nuthatchData[0].wingspanMin}-{nuthatchData[0].wingspanMax}cm </p> {/if}
           {#if nuthatchData[0].lengthMin && nuthatchData[0].lengthMax} <p> <strong> Bird Length: </strong> {nuthatchData[0].lengthMin}-{nuthatchData[0].lengthMax}cm </p> {/if}

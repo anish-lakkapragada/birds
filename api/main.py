@@ -1,11 +1,8 @@
 # %%
 import fastapi
-import typing 
 from birds_model import predict_image, convert_image
-from uuid import uuid4
-import requests
-import pandas as pd
-import shutil
+from mappings import get_sciname_to_rnames
+scinames_to_rnames = get_sciname_to_rnames()
 import time
 import os 
 import urllib.request
@@ -24,13 +21,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-birds_data = pd.read_csv("aiy_birds_V1_labelmap.csv")
-
 # image URL downloading stuff
 req = urllib.request.build_opener()
 req.addheaders = [("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64)")]
 urllib.request.install_opener(req)
 
+@app.get("/")
+async def index(): 
+    return "home!"
 
 @app.get("/predict")
 async def predict_bird(imageURL: str): 
@@ -44,7 +42,7 @@ async def predict_bird(imageURL: str):
     converted_image = convert_image(file_name)
     image_prediction = predict_image(converted_image)
     os.remove(file_name) # delete 
-    return {"SN": image_prediction, "RN": birds_data[birds_data["name"] == image_prediction]["realName"][0]}
+    return {"SN": image_prediction, "RN": scinames_to_rnames[image_prediction]}
         
 
 
