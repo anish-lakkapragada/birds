@@ -34,3 +34,4 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]
 # sudo docker run --name test -dit busybox
 # sudo docker exec test command
 
+# danks
