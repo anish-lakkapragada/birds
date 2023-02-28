@@ -49,5 +49,3 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]
 
 #    Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
 #    Donating to EFF:                    https://eff.org/donate-le
-
-# [ec2-user@ip-172-31-21-225 ~]$ 
