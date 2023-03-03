@@ -3,7 +3,6 @@
   import DomParser from "dom-parser";
   import {browser} from "$app/environment";
   import Carousel from 'svelte-carousel';
-  import Speedometer from "svelte-speedometer"; 
   import { parse } from 'node-html-parser';
   import { onMount } from 'svelte';
   export let data;
