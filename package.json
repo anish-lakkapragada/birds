@@ -18,5 +18,9 @@
   "homepage": "https://github.com/anish-lakkapragada/birds#readme",
   "devDependencies": {
     "simple-svelte-autocomplete": "^2.5.2"
+  },
+  "dependencies": {
+    "svelte": "^3.55.1",
+    "sveltestrap": "^5.10.0"
   }
 }
