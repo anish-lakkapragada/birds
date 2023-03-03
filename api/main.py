@@ -5,6 +5,7 @@ from mappings import get_sciname_to_rnames
 scinames_to_rnames = get_sciname_to_rnames()
 import time
 import os 
+import uvicorn
 import urllib.request
 
 
@@ -43,7 +44,10 @@ async def predict_bird(imageURL: str):
     image_prediction = predict_image(converted_image)
     os.remove(file_name) # delete 
     return {"SN": image_prediction, "RN": scinames_to_rnames[image_prediction]}
-        
+    
+# /etc/letsencrypt/live/birds.lakkapragada.com/fullchain.pem
+# /etc/letsencrypt/live/birds.lakkapragada.com/privkey.pem
 
+# uvicorn main:app --ssl-keyfile /etc/letsencrypt/live/birds.lakkapragada.com/privkey.pem --ssl-certfile /etc/letsencrypt/live/birds.lakkapragada.com/fullchain.pem --port 80
 
 # %%
