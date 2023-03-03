@@ -5,7 +5,7 @@
 import {createRoot} from "react-dom/client";
 
 const port = chrome.runtime.connect({ name: 'background' });
-const ENDPOINT = "http://127.0.0.1:8000"; //https://deta.space/discovery/@anishlk/birdsapiv2/1
+const ENDPOINT = "https://birds.lakkapragada.com"; //https://deta.space/discovery/@anishlk/birdsapiv2/1
 
 
 async function predictImageType(srcUrl) {

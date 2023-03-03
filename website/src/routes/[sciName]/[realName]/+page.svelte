@@ -5,6 +5,7 @@
   import Carousel from 'svelte-carousel';
   import Speedometer from "svelte-speedometer"; 
   import { parse } from 'node-html-parser';
+  import { onMount } from 'svelte';
   export let data;
 
   const {imageUrl, wikipediaImageURL, nuthatchDataAvailable, sciName, realName, description, nuthatchData, wikipediaDataAvailable, wikipediaPageHTML} = data; 
@@ -20,13 +21,16 @@
   let audioRecordingURL; 
 
   const quickFactsCSS = "mt-0 text-center text-2xl"; 
-  fetch(`https://xeno-canto.org/api/2/recordings?query=${sciName}`).then(resp => resp.json()).then(xenoRecordingData => {
-    const numRecordings = parseInt(xenoRecordingData.numRecordings);
-    if (numRecordings >= 1) {
-      audioRecordingURL = xenoRecordingData.recordings[0]?.file;
-      console.log(audioRecordingURL)
-    }
-  })
+  // should this fix? 
+  onMount(async () => {
+      fetch(`https://xeno-canto.org/api/2/recordings?query=${sciName}`).then(resp => resp.json()).then(xenoRecordingData => {
+        const numRecordings = parseInt(xenoRecordingData.numRecordings);
+        if (numRecordings >= 1) {
+          audioRecordingURL = xenoRecordingData.recordings[0]?.file;
+          console.log(audioRecordingURL)
+        }
+      })
+  }); 
 
   const imageSrcs = [];
   imageSrcs.push({imageSrc: imageUrl, imageIndex: key});
