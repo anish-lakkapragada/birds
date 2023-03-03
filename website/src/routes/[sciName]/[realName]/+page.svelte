@@ -21,7 +21,7 @@
   let audioRecordingURL; 
 
   const quickFactsCSS = "mt-0 text-center text-2xl"; 
-  // should this fix? 
+  //
   onMount(async () => {
       fetch(`https://xeno-canto.org/api/2/recordings?query=${sciName}`).then(resp => resp.json()).then(xenoRecordingData => {
         const numRecordings = parseInt(xenoRecordingData.numRecordings);
