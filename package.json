@@ -1,0 +1,22 @@
+{
+  "name": "birds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anish-lakkapragada/birds.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anish-lakkapragada/birds/issues"
+  },
+  "homepage": "https://github.com/anish-lakkapragada/birds#readme",
+  "devDependencies": {
+    "simple-svelte-autocomplete": "^2.5.2"
+  }
+}
