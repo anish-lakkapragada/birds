@@ -34,6 +34,8 @@ async def index():
 @app.get("/predict")
 async def predict_bird(imageURL: str): 
     file_name = f"temp/photo-{time.time()}"
+    print(imageURL)
+    print("BRUHSKI")
     try: 
         urllib.request.urlretrieve(imageURL, file_name)
     except Exception as e: 

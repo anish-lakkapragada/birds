@@ -33,3 +33,17 @@ def predict_image(image):
     
 # predict_image(image.reshape(1, 224, 224, 3), labelmap_df)
 # %%
+
+
+# server {
+#         server_name  birdsinfo.lakkapragada.com;
+#         location / {
+#         proxy_pass http://127.0.0.1:5173;
+#       }
+
+#     listen 669 ssl; # managed by Certbot 
+#     ssl_certificate /etc/letsencrypt/live/birds.lakkapragada.com/fullchain.pem; # managed by Certbot
+#     ssl_certificate_key /etc/letsencrypt/live/birds.lakkapragada.com/privkey.pem; # managed by Certbot
+#     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+#     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot 
+# }
