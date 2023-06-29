@@ -25,7 +25,7 @@ export async function load({ params, url }) {
 	// first check a wikipedia article exists for this bird 
 	let wikipediaDataAvailable = true; 
 	console.log(`request name: ${requestName}`)
-	response = await fetch(
+	let response = await fetch(
     	`https://en.wikipedia.org/w/api.php?action=query&titles=${requestName}&format=json&prop=extracts&exintro&explaintext&redirects=1`
     );
 
