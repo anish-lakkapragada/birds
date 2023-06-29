@@ -46,8 +46,8 @@
   const imageSrcs = [];
   imageSrcs.push({ imageSrc: imageUrl, imageIndex: key });
   if (nuthatchDataAvailable) {
-    name = nuthatchData[0].name;
-    for (const imageUrlNuthatch of nuthatchData[0].images) {
+    name = nuthatchData.entities[0].name;
+    for (const imageUrlNuthatch of nuthatchData.entities[0].images) {
       key += 1;
       imageSrcs.push({ imageSrc: imageUrlNuthatch, imageIndex: key });
     }
@@ -133,16 +133,18 @@
       </h1>
       <div class="mt-0 text-md flex flex-row gap-[6em] w-full justify-center">
         <p><strong> Concern: </strong> {nuthatchData[0].status}</p>
-        {#if nuthatchData[0].wingspanMin && nuthatchData[0].wingspanMax}
+        {#if nuthatchData.entities[0].wingspanMin && nuthatchData.entities[0].wingspanMax}
           <p>
             <strong> Wingspan Length: </strong>
-            {nuthatchData[0].wingspanMin}-{nuthatchData[0].wingspanMax}cm
+            {nuthatchData.entities[0].wingspanMin}-{nuthatchData.entities[0]
+              .wingspanMax}cm
           </p>
         {/if}
-        {#if nuthatchData[0].lengthMin && nuthatchData[0].lengthMax}
+        {#if nuthatchData.entities[0].lengthMin && nuthatchData.entities[0].lengthMax}
           <p>
             <strong> Bird Length: </strong>
-            {nuthatchData[0].lengthMin}-{nuthatchData[0].lengthMax}cm
+            {nuthatchData.entities[0].lengthMin}-{nuthatchData.entities[0]
+              .lengthMax}cm
           </p>
         {/if}
       </div>

@@ -5,27 +5,25 @@ export async function load({ params, url }) {
 	let wikipediaImageURL; 
 
 	const imageUrl = url.searchParams.get("url")
-    const nuthatchURL = `https://nuthatch.lastelm.software/birds?sciName=${sciName}&operator=AND`; 
-	const nuthatchData = null; 
-	const nuthatchDataAvailable = false; 
-	// let response = await fetch(nuthatchURL, {
-	// 		method: 'GET',
-	// 		headers: {
-	// 			'API-Key': 'f0a7a774-f08f-4e4e-9e26-0fc55163f693'
-	// 		}}); 
+    const nuthatchURL = `https://nuthatch.lastelm.software/v2/birds?sciName=${sciName}&operator=AND`; 
+	let response = await fetch(nuthatchURL, {
+			method: 'GET',
+			headers: {
+				'API-Key': 'f0a7a774-f08f-4e4e-9e26-0fc55163f693'
+			}}); 
 
-	// const nuthatchData = await response.json();
-	// let nuthatchDataAvailable = true; 
-    // if (nuthatchData.length == 0) {
-	// 	nuthatchDataAvailable = false; 
-	// } else {
-	// 	requestName = nuthatchData[0].name;
-	// }
+	const nuthatchData = await response.json();
+	let nuthatchDataAvailable = true; 
+    if (nuthatchData.entities.length == 0) {
+		nuthatchDataAvailable = false; 
+	} else {
+		requestName = nuthatchData.entities[0].name;
+	}
 
 	// first check a wikipedia article exists for this bird 
 	let wikipediaDataAvailable = true; 
 	console.log(`request name: ${requestName}`)
-	let response = await fetch(
+	response = await fetch(
     	`https://en.wikipedia.org/w/api.php?action=query&titles=${requestName}&format=json&prop=extracts&exintro&explaintext&redirects=1`
     );
 
