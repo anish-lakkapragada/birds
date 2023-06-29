@@ -1,5 +1,4 @@
-import {getWikiImageLink, getNames} from "../../helpers";
-import DomParser from "dom-parser";
+import {getWikiImageLink} from "../../helpers";
 export async function load({ params, url }) {
     const {sciName, realName} = params;
 	let requestName = sciName; 
@@ -7,19 +6,21 @@ export async function load({ params, url }) {
 
 	const imageUrl = url.searchParams.get("url")
     const nuthatchURL = `https://nuthatch.lastelm.software/birds?sciName=${sciName}&operator=AND`; 
-	let response = await fetch(nuthatchURL, {
-			method: 'GET',
-			headers: {
-				'API-Key': 'f0a7a774-f08f-4e4e-9e26-0fc55163f693'
-			}}); 
+	const nuthatchData = null; 
+	const nuthatchDataAvailable = false; 
+	// let response = await fetch(nuthatchURL, {
+	// 		method: 'GET',
+	// 		headers: {
+	// 			'API-Key': 'f0a7a774-f08f-4e4e-9e26-0fc55163f693'
+	// 		}}); 
 
-	const nuthatchData = await response.json();
-	let nuthatchDataAvailable = true; 
-    if (nuthatchData.length == 0) {
-		nuthatchDataAvailable = false; 
-	} else {
-		requestName = nuthatchData[0].name;
-	}
+	// const nuthatchData = await response.json();
+	// let nuthatchDataAvailable = true; 
+    // if (nuthatchData.length == 0) {
+	// 	nuthatchDataAvailable = false; 
+	// } else {
+	// 	requestName = nuthatchData[0].name;
+	// }
 
 	// first check a wikipedia article exists for this bird 
 	let wikipediaDataAvailable = true; 
