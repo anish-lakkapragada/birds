@@ -132,7 +132,7 @@
         Quick Facts
       </h1>
       <div class="mt-0 text-md flex flex-row gap-[6em] w-full justify-center">
-        <p><strong> Concern: </strong> {nuthatchData[0].status}</p>
+        <p><strong> Concern: </strong> {nuthatchData.entities[0].status}</p>
         {#if nuthatchData.entities[0].wingspanMin && nuthatchData.entities[0].wingspanMax}
           <p>
             <strong> Wingspan Length: </strong>
