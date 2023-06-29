@@ -147,6 +147,13 @@
               .lengthMax}cm
           </p>
         {/if}
+        {#if nuthatchData.entities[0].region?.length > 0}
+          <p>
+            <strong>
+              Found in: {nuthatchData.entities[0].region.join(" ")}
+            </strong>
+          </p>
+        {/if}
       </div>
     {/if}
   </div>
