@@ -20,6 +20,7 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/kit": "^1.21.0",
+		"@sveltejs/adapter-node": "next",
 		"dom-parser": "^0.1.6",
 		"node-html-parser": "^6.1.5"
 	}
