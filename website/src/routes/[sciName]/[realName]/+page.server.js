@@ -1,12 +1,11 @@
-import {getWikiImageLink, getNames} from "../../helpers";
-import DomParser from "dom-parser";
+import {getWikiImageLink} from "../../helpers";
 export async function load({ params, url }) {
     const {sciName, realName} = params;
 	let requestName = sciName; 
 	let wikipediaImageURL; 
 
 	const imageUrl = url.searchParams.get("url")
-    const nuthatchURL = `https://nuthatch.lastelm.software/birds?sciName=${sciName}&operator=AND`; 
+    const nuthatchURL = `https://nuthatch.lastelm.software/v2/birds?sciName=${sciName}&operator=AND`; 
 	let response = await fetch(nuthatchURL, {
 			method: 'GET',
 			headers: {
@@ -15,10 +14,10 @@ export async function load({ params, url }) {
 
 	const nuthatchData = await response.json();
 	let nuthatchDataAvailable = true; 
-    if (nuthatchData.length == 0) {
+    if (nuthatchData.entities.length == 0) {
 		nuthatchDataAvailable = false; 
 	} else {
-		requestName = nuthatchData[0].name;
+		requestName = nuthatchData.entities[0].name;
 	}
 
 	// first check a wikipedia article exists for this bird 

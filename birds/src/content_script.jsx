@@ -29,9 +29,11 @@ port.onMessage.addListener(async (msg) => {
   div.setAttribute("id", "inject-container");
   document.body.appendChild(div);
   const root = createRoot(document.getElementById("inject-container"));
+  const URL = "https://birds-umber.vercel.app";
   const { successClassification, classificationResp } = await predictImageType(
     srcUrl
   );
+
   if (msg.purpose == "guessBirdModal" && document.visibilityState == "visible") {
     
     let element; 
@@ -41,7 +43,7 @@ port.onMessage.addListener(async (msg) => {
               <iframe
                 style={{ width: "100%", border: "0" }}
                 className="iframy"
-                src={`http://localhost:5173/${classificationResp.SN}/${successClassification ? classificationResp.RN : "background"}/guess?url=${srcUrl}`}
+                src={`${URL}/${classificationResp.SN}/${successClassification ? classificationResp.RN : "background"}/guess?url=${srcUrl}`}
               ></iframe>
             </div>
           </div>
@@ -84,7 +86,7 @@ port.onMessage.addListener(async (msg) => {
               <iframe
                 style={{ width: "100%", border: "0" }}
                 className="iframy"
-                src={`http://localhost:5173/${classificationResp.SN}/${classificationResp.RN}/?url=${srcUrl}`}
+                src={`${URL}/${classificationResp.SN}/${classificationResp.RN}/?url=${srcUrl}`}
               ></iframe>
             </div>
           </div>
