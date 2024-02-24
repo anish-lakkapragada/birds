@@ -1,13 +1,26 @@
 FROM python:3.8-slim
 
-RUN pip install -r requirements.txt
+RUN echo $(ls)
 
 WORKDIR /api
-COPY . ./api
+COPY . /api
+WORKDIR /api
 
-EXPOSE 80
+RUN echo $(ls)
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
+
+RUN pip install uvicorn fastapi tensorflow-cpu tensorflow-hub opencv-python-headless numpy 
+
+EXPOSE 8000
+
+CMD ["echo $(ls)"]
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"] 
 
 # to clean: 
 # sudo docker system prune
@@ -26,7 +39,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]
 # run:
 # redis-server
 # celery -A tasks worker --pool=solo --loglevel=info
-# sudo docker run -p 443:443 --env-file=.env api
+# sudo docker run -p 8000:8000 api
 
 # # uvicorn api:app --host 0.0.0.0 --port 80
 

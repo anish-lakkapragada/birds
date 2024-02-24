@@ -3,3 +3,4 @@ tensorflow_hub
 numpy
 fastapi
 tensorflow_cpu
+uvicorn

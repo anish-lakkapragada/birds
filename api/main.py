@@ -29,7 +29,7 @@ urllib.request.install_opener(req)
 
 @app.get("/")
 async def index(): 
-    return "home!"
+    return "hello mom!"
 
 @app.get("/predict")
 async def predict_bird(imageURL: str): 
@@ -39,9 +39,12 @@ async def predict_bird(imageURL: str):
     except Exception as e: 
         print(e)
         return {"error": "shit"}
-            
+    
+    print('we caa done')
     converted_image = convert_image(file_name)
+    print('we converting')
     image_prediction = predict_image(converted_image)
+    print('brooo')
     os.remove(file_name) # delete 
     return {"SN": image_prediction, "RN": scinames_to_rnames[image_prediction]}
     
